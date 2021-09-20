@@ -8,22 +8,25 @@ export const cursos = {
   },
   getters: {
     cantidadTotalAlumnosPermitidos(state) {
-      return state.data.reduce((accumulator, curso) => {
-        accumulator += Number.parseInt(curso.cupos)
-        return accumulator
-      }, 0)
+      let contador = 0
+      state.data.forEach((curso) => {
+        contador += Number.parseInt(curso.cupos)
+      })
+      return contador
     },
     cantidadTotalAlumnosInscritos(state) {
-      return state.data.reduce((accumulator, curso) => {
-        accumulator += Number.parseInt(curso.inscritos)
-        return accumulator
-      }, 0)
+      let contador = 0
+      state.data.forEach((curso) => {
+        contador += Number.parseInt(curso.inscritos)
+      })
+      return contador
     },
     cantidadTotalCuposRestantes(state) {
-      return state.data.reduce((accumulator, curso) => {
-        accumulator += Number.parseInt(curso.cupos) - Number.parseInt(curso.inscritos)
-        return accumulator
-      }, 0)
+      let contador = 0
+      state.data.forEach((curso) => {
+        contador += Number.parseInt(curso.cupos) - Number.parseInt(curso.inscritos)
+      })
+      return contador
     },
     cantidadTotalCursosTerminados(state) {
       return state.data.filter((curso) => curso.estado).length
