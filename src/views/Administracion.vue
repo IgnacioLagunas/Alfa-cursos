@@ -1,11 +1,13 @@
 <template>
   <div>
-    <v-layout justify-center class="mb-4">
+    <v-row justify="center" class="my-4">
       <h1>Administración</h1>
-      <AgregarCursoBtn />
-    </v-layout>
+    </v-row>
 
     <CursosTabla />
+    <v-row class="justify-end my-6 mr-2">
+      <AgregarCursoBtn />
+    </v-row>
 
     <AlertSection />
   </div>
