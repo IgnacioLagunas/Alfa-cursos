@@ -1,5 +1,5 @@
 import Firebase from 'firebase'
-import { firebaseConfig } from '../../firebase-config'
+import { firebaseConfig } from '../components/firebase-config'
 
 export const system = {
   namespaced: true,

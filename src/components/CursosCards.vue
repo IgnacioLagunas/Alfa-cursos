@@ -16,7 +16,7 @@
                 <div>
                   <div class="font-weight-normal">
                     <span
-                      >Costo: <strong>{{ curso.costo }}</strong></span
+                      >Costo: <strong>{{ `$${curso.costo.toLocaleString()} ` }}</strong></span
                     >
                   </div>
                   <span

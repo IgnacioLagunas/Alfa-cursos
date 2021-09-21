@@ -1,26 +1,36 @@
 <template>
-  <v-form @submit.prevent="handleLoginFormSubmit" ref="form">
-    <v-text-field
-      name="email"
-      placeholder="E-mail"
-      type="email"
-      v-model="email"
-      :rules="[(v) => !!v || 'Este campo es obligatorio']"
-    ></v-text-field>
-    <v-text-field
-      name="password"
-      placeholder="Password"
-      type="password"
-      :counter="20"
-      v-model="password"
-      :rules="[(v) => !!v || 'Este campo es obligatorio']"
-    ></v-text-field>
-    <v-layout justify-space-around class="mt-4">
-      <v-btn type="submit" color="success">Iniciar</v-btn>
-      <v-btn type="reset" color="error" @click="$refs.form.reset()">Limpiar formulario</v-btn>
-      <v-btn type="button" color="warning" @click="$refs.form.resetValidation()">Limpiar validacion</v-btn>
-    </v-layout>
-  </v-form>
+  <v-row>
+    <v-col>
+      <v-form @submit.prevent="handleLoginFormSubmit" ref="form" outlined>
+        <v-text-field
+          name="email"
+          placeholder="E-mail"
+          type="email"
+          v-model="email"
+          :rules="[(v) => !!v || 'Este campo es obligatorio']"
+        ></v-text-field>
+        <v-text-field
+          name="password"
+          placeholder="Password"
+          type="password"
+          :counter="20"
+          v-model="password"
+          :rules="[(v) => !!v || 'Este campo es obligatorio']"
+        ></v-text-field>
+        <v-row justify="center" class="mt-4">
+          <v-btn class="text-center mt-2" large color="success darken-2" dark type="submit">
+            {{ registro ? 'registrar usuario' : 'iniciar sesión' }}
+          </v-btn>
+        </v-row>
+        <v-row justify="center" class="mt-8">
+          <v-text class="text-subtitle-1 grey--text" v-if="!registro"
+            >Si no tienes una cuenta puedes registrarte
+            <span class="purple--text subtitle" @click="$router.push('/sign-in')">aquí</span></v-text
+          >
+        </v-row>
+      </v-form>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -29,6 +39,9 @@ export default {
     email: null,
     password: null
   }),
+  props: {
+    registro: Boolean
+  },
   methods: {
     handleLoginFormSubmit() {
       if (this.$refs.form.validate()) {
@@ -39,4 +52,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.subtitle {
+  cursor: pointer;
+}
+.subtitle:hover {
+  border-bottom: 1px purple solid;
+}
+</style>

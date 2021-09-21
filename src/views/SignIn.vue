@@ -3,7 +3,7 @@
     <v-layout justify-center>
       <v-flex xs9>
         <h3>Registro de Usuario</h3>
-        <UserForm @submit="handleCreateUserFormSubmit" />
+        <UserForm @submit="handleCreateUserFormSubmit" :registro="true" />
       </v-flex>
     </v-layout>
   </v-container>

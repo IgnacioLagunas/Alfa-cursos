@@ -1,4 +1,5 @@
 import Firebase from 'firebase'
+// import firebaseApp from '../components/firebaseInit'
 
 export const cursos = {
   namespaced: true,
@@ -44,22 +45,12 @@ export const cursos = {
     },
     SET_CURSO(state, newCurso) {
       state.curso = newCurso
-    },
-    SET_CURSO_NOMBRE(state, nuevoNombre) {
-      state.curso.nombre = nuevoNombre
-    },
-    SET_CURSO_DESCRIPCION(state, nuevaDescripcion) {
-      state.curso.descripcion = nuevaDescripcion
-    },
-    SET_CURSO_DURACION(state, nuevaDuracion) {
-      state.curso.duracion = nuevaDuracion
-    },
-    MUTATE_CURSO(state, payload) {
-      state.curso[payload.property] = payload.with
     }
   },
   actions: {
     getCursos(context) {
+      // Intenté traer la firestore de otra forma como se puede ver en la funcion comentada de abajo pero no hubo caso de que funcionara.
+      // Lo dejo asi por que es la unica forma que me funcionó.
       const firebaseApp = context.rootState.system.firebase
       Firebase.firestore(firebaseApp)
         .collection('cursos')
@@ -70,6 +61,16 @@ export const cursos = {
           context.commit('SET_DATA', data)
         })
     },
+    // getCursos(context) {
+    //   Firebase.firestore(firebaseApp)
+    //     .collection('cursos')
+    //     .get()
+    //     .then((querySnapshot) => {
+    //       let data = []
+    //       querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }))
+    //       context.commit('SET_DATA', data)
+    //     })
+    // },
     borrarCurso(context, curso) {
       const firebaseApp = context.rootState.system.firebase
       Firebase.firestore(firebaseApp)
@@ -80,6 +81,16 @@ export const cursos = {
           context.dispatch('getCursos')
         })
     },
+    // borrarCurso(context, curso) {
+    //   firebaseApp
+    //     .firestore()
+    //     .collection('cursos')
+    //     .doc(curso.id)
+    //     .delete()
+    //     .then(() => {
+    //       context.dispatch('getCursos')
+    //     })
+    // },
     getCurso(context, id) {
       context.commit('UNSET_CURSO')
       const firebaseApp = context.rootState.system.firebase
@@ -94,6 +105,21 @@ export const cursos = {
           }, reject)
       })
     },
+    // getCurso(context, id) {
+    //   context.commit('UNSET_CURSO')
+    //   console.log('hola')
+    //   return new Promise((resolve, reject) => {
+    //     firebaseApp
+    //       .firestore()
+    //       .collection('cursos')
+    //       .doc(id)
+    //       .get()
+    //       .then((doc) => {
+    //         context.commit('SET_CURSO', { id: doc.id, ...doc.data() })
+    //         resolve()
+    //       }, reject)
+    //   })
+    // },
     actualizarCurso(context, curso) {
       const firebaseApp = context.rootState.system.firebase
       return new Promise((resolve, reject) => {

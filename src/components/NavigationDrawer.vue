@@ -10,21 +10,7 @@
     <v-list>
       <v-list-item link>
         <v-list-item-content>
-          <v-col class="text-center">
-            <v-avatar color="purple" size="50" align-self="center" v-if="userLoged">
-              <span class="white--text text-h5">{{ $store.state.session.user.email[0].toUpperCase() }}</span></v-avatar
-            >
-            <v-avatar color="grey" size="50" align-self="center" v-else> <v-icon>mdi-account</v-icon></v-avatar>
-          </v-col>
-          <v-list-item-title class="text-center text-body-1 ma-1" v-if="userLoged">
-            {{ $store.state.session.user.email }}
-          </v-list-item-title>
-          <v-btn class="text-center mt-2 pa-0" @click="logOut()" outlined v-if="userLoged">
-            Cerrar sesion <span class="ml-1"><v-icon small>mdi-logout</v-icon></span></v-btn
-          >
-          <v-btn class="text-center mt-2 pa-0" to="/login" outlined v-else>
-            Iniciar sesion <span class="ml-1"><v-icon small>mdi-login</v-icon></span></v-btn
-          >
+          <UserCard :userLoged="userLoged" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -45,6 +31,8 @@
 </template>
 
 <script>
+import UserCard from './UserCard.vue'
+
 export default {
   data: () => ({
     drawer: false,
@@ -75,18 +63,15 @@ export default {
       }
     ]
   }),
+  components: {
+    UserCard
+  },
   computed: {
     navListItems() {
       return this.$store.state.session.user === null ? this.items : this.logedItems
     },
     userLoged() {
       return this.$store.state.session.user === null ? false : true
-    }
-  },
-  methods: {
-    logOut() {
-      this.$store.dispatch('session/logOut')
-      this.$router.push('login')
     }
   }
 }

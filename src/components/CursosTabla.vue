@@ -47,7 +47,7 @@ export default {
         value: 'costo'
       },
       {
-        text: 'terminado',
+        text: 'Terminado',
         value: 'estado'
       },
       {
