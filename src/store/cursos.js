@@ -48,96 +48,50 @@ export const cursos = {
     }
   },
   actions: {
-    getCursos(context) {
-      // Intenté traer la firestore de otra forma como se puede ver en la funcion comentada de abajo pero no hubo caso de que funcionara.
-      // Lo dejo asi por que es la unica forma que me funcionó.
+    async getCursos(context) {
       const firebaseApp = context.rootState.system.firebase
-      Firebase.firestore(firebaseApp)
-        .collection('cursos')
-        .get()
-        .then((querySnapshot) => {
-          let data = []
-          querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }))
-          context.commit('SET_DATA', data)
-        })
+
+      let querySnapshot = await Firebase.firestore(firebaseApp).collection('cursos').get()
+      let data = []
+      querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }))
+      context.commit('SET_DATA', data)
     },
-    // getCursos(context) {
+
+    // Intenté traer la firestore de otra forma como se puede ver en la funcion comentada de abajo y en el import comentado de arriba, pero no hubo caso de que funcionara.
+    // Lo dejo asi por que es la unica forma que me funcionó.
+
+    //async getCursos(context) {
     //   Firebase.firestore(firebaseApp)
-    //     .collection('cursos')
-    //     .get()
-    //     .then((querySnapshot) => {
-    //       let data = []
-    //       querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }))
-    //       context.commit('SET_DATA', data)
-    //     })
+    //     .collection('cursos').doc(curso.id).delete()
+    // context.dispatch('getCursos')
     // },
-    borrarCurso(context, curso) {
+
+    async borrarCurso(context, curso) {
       const firebaseApp = context.rootState.system.firebase
-      Firebase.firestore(firebaseApp)
-        .collection('cursos')
-        .doc(curso.id)
-        .delete()
-        .then(() => {
-          context.dispatch('getCursos')
-        })
+
+      Firebase.firestore(firebaseApp).collection('cursos').doc(curso.id).delete()
+      context.dispatch('getCursos')
     },
-    // borrarCurso(context, curso) {
-    //   firebaseApp
-    //     .firestore()
-    //     .collection('cursos')
-    //     .doc(curso.id)
-    //     .delete()
-    //     .then(() => {
-    //       context.dispatch('getCursos')
-    //     })
-    // },
-    getCurso(context, id) {
+
+    async getCurso(context, id) {
       context.commit('UNSET_CURSO')
       const firebaseApp = context.rootState.system.firebase
-      return new Promise((resolve, reject) => {
-        Firebase.firestore(firebaseApp)
-          .collection('cursos')
-          .doc(id)
-          .get()
-          .then((doc) => {
-            context.commit('SET_CURSO', { id: doc.id, ...doc.data() })
-            resolve()
-          }, reject)
-      })
+
+      let doc = await Firebase.firestore(firebaseApp).collection('cursos').doc(id).get()
+      console.log(doc)
+      context.commit('SET_CURSO', { id: doc.id, ...doc.data() })
     },
-    // getCurso(context, id) {
-    //   context.commit('UNSET_CURSO')
-    //   console.log('hola')
-    //   return new Promise((resolve, reject) => {
-    //     firebaseApp
-    //       .firestore()
-    //       .collection('cursos')
-    //       .doc(id)
-    //       .get()
-    //       .then((doc) => {
-    //         context.commit('SET_CURSO', { id: doc.id, ...doc.data() })
-    //         resolve()
-    //       }, reject)
-    //   })
-    // },
-    actualizarCurso(context, curso) {
+
+    async actualizarCurso(context, curso) {
       const firebaseApp = context.rootState.system.firebase
-      return new Promise((resolve, reject) => {
-        Firebase.firestore(firebaseApp)
-          .collection('cursos')
-          .doc(context.state.curso.id)
-          .update(curso)
-          .then(() => {
-            context.dispatch('getCursos')
-            resolve()
-          }, reject)
-      })
+
+      await Firebase.firestore(firebaseApp).collection('cursos').doc(context.state.curso.id).update(curso)
+      context.dispatch('getCursos')
     },
-    crearCurso(context, nuevoCurso) {
+    async crearCurso(context, nuevoCurso) {
       const firebaseApp = context.rootState.system.firebase
-      return new Promise((resolve, reject) => {
-        Firebase.firestore(firebaseApp).collection('cursos').add(nuevoCurso).then(resolve, reject)
-      })
+
+      await Firebase.firestore(firebaseApp).collection('cursos').add(nuevoCurso)
     }
   }
 }

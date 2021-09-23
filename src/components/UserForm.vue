@@ -23,10 +23,10 @@
           </v-btn>
         </v-row>
         <v-row justify="center" class="mt-8">
-          <v-text class="text-subtitle-1 grey--text" v-if="!registro"
-            >Si no tienes una cuenta puedes registrarte
-            <span class="purple--text subtitle" @click="$router.push('/sign-in')">aquí</span></v-text
-          >
+          <div class="text-subtitle-1 grey--text" v-if="!registro">
+            Si no tienes una cuenta puedes registrarte
+            <span class="purple--text subtitle" @click="$router.push('/sign-in')">aquí</span>
+          </div>
         </v-row>
       </v-form>
     </v-col>

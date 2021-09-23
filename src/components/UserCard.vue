@@ -6,9 +6,9 @@
       >
       <v-avatar color="grey" size="50" align-self="center" v-else> <v-icon>mdi-account</v-icon></v-avatar>
     </v-col>
-    <v-text class="text-center text-body-1 ma-1" v-if="userLoged">
+    <div class="text-center text-body-1 ma-1" v-if="userLoged">
       {{ $store.state.session.user.email }}
-    </v-text>
+    </div>
     <v-row justify="center" class="mt-2">
       <v-btn class="text-center mt-2" @click="logOut()" outlined v-if="userLoged">
         Cerrar sesion <span class="ml-1"><v-icon small>mdi-logout</v-icon></span></v-btn

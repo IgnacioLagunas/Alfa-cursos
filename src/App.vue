@@ -14,14 +14,8 @@
 
 <script>
 import NavigationDrawer from './components/NavigationDrawer.vue'
-// import Footer from './components/Footer.vue'
 import Toolbar from './components/Toolbar.vue'
 export default {
-  components: { NavigationDrawer, Toolbar },
-  data() {
-    return {
-      title: 'Vuetify.js'
-    }
-  }
+  components: { NavigationDrawer, Toolbar }
 }
 </script>

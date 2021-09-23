@@ -61,9 +61,6 @@ export default {
     ]
   }),
   methods: {
-    editarItem(item) {
-      console.log(item)
-    },
     borrarItem(item) {
       prompt('Desea borrar el elemento?')
       this.$store.dispatch('cursos/borrarCurso', item)
