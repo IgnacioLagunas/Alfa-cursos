@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-    <v-layout justify-center>
-      <v-flex xs9>
-        <h3>Login de Usuario</h3>
+  <div style="margin-top: 100px">
+    <v-row justify="center" class="">
+      <v-col sm="4" class="grey lighten-4 pa-12 rounded-lg elevation-5">
+        <h1 class="purple--text text--darken-4 mb-6">Iniciar Sesión</h1>
         <UserForm @submit="handleLoginFormSubmit" />
-      </v-flex>
-    </v-layout>
-  </v-container>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>

@@ -1,8 +1,9 @@
 <template>
   <v-row>
     <v-col>
-      <v-form @submit.prevent="handleLoginFormSubmit" ref="form" outlined>
+      <v-form @submit.prevent="handleLoginFormSubmit" ref="form" class="mt-5" outlined>
         <v-text-field
+          solo
           name="email"
           placeholder="E-mail"
           type="email"
@@ -10,6 +11,8 @@
           :rules="[(v) => !!v || 'Este campo es obligatorio']"
         ></v-text-field>
         <v-text-field
+          solo
+          class="mt-12"
           name="password"
           placeholder="Password"
           type="password"
@@ -18,7 +21,7 @@
           :rules="[(v) => !!v || 'Este campo es obligatorio']"
         ></v-text-field>
         <v-row justify="center" class="mt-4">
-          <v-btn class="text-center mt-2" large color="success darken-2" dark type="submit">
+          <v-btn class="text-center mt-8" large color="success darken-2" dark type="submit">
             {{ registro ? 'registrar usuario' : 'iniciar sesión' }}
           </v-btn>
         </v-row>
