@@ -11,6 +11,8 @@
 </template>
 
 <script>
+// url del deploy https://alfa-cursos.web.app
+
 import NavigationDrawer from './components/NavigationDrawer.vue'
 import Toolbar from './components/Toolbar.vue'
 export default {
